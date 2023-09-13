@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+            // TODO: Add code to check answers to questions
+            document.addEventListener("DOMContentLoaded",
+                function()
+                {
+                    // When button in choise question is pressed.
+                    let buttons = document.querySelectorAll(".button");
+                    for (let i=0; i < buttons.length; i++)
+                    {
+                        buttons[i].addEventListener("click", function(event)
+                        {
+                            if (buttons[i].innerHTML == "Mercury")
+                            {
+                                buttons[i].style.backgroundColor = "green";
+                                document.querySelector("#f1").innerHTML = "Correct!";
+                            }
+                            else
+                            {
+                                buttons[i].style.backgroundColor = "red";
+                                document.querySelector("#f1").innerHTML = "Incorrect!";
+                            }
+                        });
+                    }
+                });
+
+            // When answer in Free Responce question is submitted.
+            function freeAnswer()
+            {
+                let answer = document.querySelector("#answer")
+                if (answer.value.toLowerCase() == "moscow")
+                {
+                    answer.style.backgroundColor = "green"
+                    document.querySelector("#f2").innerHTML = "Correct!";
+                }
+                else
+                {
+                    answer.style.backgroundColor = "red"
+                    document.querySelector("#f2").innerHTML = "Incorrect!";
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <!-- TODO: Add multiple choice question here -->
+                <h3>What is the nearest planet to the sun?</h3>
+
+                <button type="button" class="button">Mercury</button>
+                <button type="button" class="button">Pluto</button>
+                <button type="button" class="button">Titan</button>
+                <button type="button" class="button">Neptune</button>
+
+                <p id="f1"></p>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <!-- TODO: Add free response question here -->
+                <h3>What is the capital of Russia?</h3>
+                <form onsubmit="freeAnswer(); return false;">
+                    <input id="answer" type="text">
+                    <input type="submit" value="Check Answer">
+                </form>
+
+                <p id="f2"></p>
+
+            </div>
+
+        </div>
+    </body>
+</html>
