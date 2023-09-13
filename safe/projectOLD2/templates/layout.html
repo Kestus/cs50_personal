@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/static/header.css" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="/static/nav-menu.js" defer></script>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <a href="/">
+                <h1 class="logo">LOGO</h1>
+            </a>
+            <button class="mobile-menu-toggle" data-visible="False" controls="nav-menu"></button>
+            <div class="nav-menu" data-visible="False" id="nav-menu">
+                <ul class="nav-menu-list">
+                    <a href="/latest"><li class="nav-item">LATEST</li></a>
+                    <a href="/add"><li class="nav-item">ADD NEW</li></a>
+                    <a href="/search"><li class="nav-item">SEARCH</li></a>
+                </ul>
+                <div class="count">Daily limit: {{ count }}/1000</div>
+            </div>
+        </nav>
+    </header>
+    {% if get_flashed_messages() %}
+        <div class="flash-container">
+            <div class="flash">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </div>
+    {% endif %}
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+</body>
+</html>

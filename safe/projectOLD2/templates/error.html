@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Latest
+{% endblock %}
+
+{% block main %}
+<div class="main-error">
+    <div>
+        {{ error }}
+    </div>
+    {% if message %}
+        <div>
+            {{ message }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

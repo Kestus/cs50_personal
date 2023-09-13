@@ -1,0 +1,158 @@
+:root {
+    --nav-bar: #10613A;
+    --background: #559F73;
+    --dark-1: #004420;
+    --dark-2: #002903;
+    --text-color-1: white;
+    --gray: #989898;
+
+    --green-1: #559F73;
+    --green-2: #357F56;
+    --green-3: #10613A;
+    --green-4: #004420;
+    --green-5: #002903;
+
+    --blue-1: #00C7F8;
+    --blue-2: #009ECE;
+    --blue-3: #0078A5;
+    --blue-4: #00537D;
+    --blue-5: #003058;
+}
+
+
+body {
+    background: var(--background);
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
+
+
+/* ----- NAV BAR ----- */
+
+/* ----- Desktop NAV ----- */
+.nav-bar {
+    align-items: center;
+    height: 4rem;
+    background: var(--nav-bar);
+
+    display: flex;
+    border-bottom:10px solid var(--green-4);
+}
+
+.logo {
+    color: var(--blue-5);
+    margin: 1rem;
+}
+.nav-menu {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.nav-menu-list {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 0 1rem;
+    list-style: none;
+}
+.nav-item {
+    padding: 1rem 0.25rem;
+    border-radius: 2px;
+    color: white;
+}
+.nav-item:hover {
+    background-color: var(--green-4);
+}
+
+.count{
+    width: 13em;
+    text-align: center;
+    color: white;
+    background: var(--dark-1);
+    padding: 1em 0.25em;
+    margin-left: auto;
+    margin-right: 0.25rem;
+    border-radius: 5%;
+}
+
+.mobile-menu-toggle {
+    display: none;
+}
+
+
+
+/* ----- Mobile NAV ----- */
+
+@media (max-width: 700px) {
+    .nav-bar {
+        justify-content: center;
+    }
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+
+        position: fixed;
+        height: auto;
+        top: 4rem;
+        right: 0;
+
+        width: min(100%, 15rem);
+        background: var(--nav-bar);
+
+
+        transform: translateX(100%);
+        transition: transform 230ms ease-in-out;
+    }
+    .nav-menu-list {
+        flex-direction: column;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-item {
+        margin: 0;
+        border-top: 3px solid var(--green-5);
+        border-bottom: 3px solid var(--green-5);
+        background-color: var(--green-4);
+    }
+    .nav-item:hover {
+        background-color: var(--green-3);
+    }
+
+
+    .count {
+        margin: 0;
+        margin-top: 4rem;
+        width: 100%;
+        text-align: center;
+    }
+
+
+
+    /* --- MOBILE MENU TOGGLE BUTTON --- */
+    .mobile-menu-toggle {
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        border:none;
+        background-color: transparent;
+        background-image: url("/static/assets/borgar.svg");
+        background-size: cover;
+        width: 2rem;
+        height: 2rem;
+        top: 1rem;
+        right: 1rem;
+    }
+
+
+    .mobile-menu-toggle[data-visible="True"] {
+        background-image: url("/static/assets/borgar-x.svg");
+    }
+    .nav-menu[data-visible="True"] {
+        transform: translateX(0%);
+    }
+}

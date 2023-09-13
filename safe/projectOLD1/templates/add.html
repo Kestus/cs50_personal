@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add New
+{% endblock %}
+
+{% block main %}
+<div class="main-add">
+    <form class="add-form form" action="/add" method="POST">
+        {% if error %}
+            <div class="form-item">
+                <input class="form-input invalid" name="spotify_url" type="text" autocomplete="off">
+            </div>
+            <div  class="error">
+                <span>{{ error }}</span>
+            </div>
+        {% else %}
+            <div class="form-item">
+                <input class="form-input" name="spotify_url" type="text" autocomplete="off">
+            </div>
+        {% endif %}
+        <div class="form-item">
+            <button class="btn add-btn" type="submit" onclick="loading();">ADD</button>
+        </div>
+    </form>
+    <div class="loading">
+    </div>
+</div>
+{% endblock %}

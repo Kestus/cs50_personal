@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    playlist
+{% endblock %}
+
+{% block main %}
+<div class="main-playlist">
+  <div class="player-container">
+
+    <div class="controls">
+      <div class="control-buttons">
+        <button class="player-btn repeat" onclick="repeatState()" >Repeat</button>
+        <button class="player-btn shuffle" onclick="shuffle()">Shuffle</button>
+      </div>
+      <div class="video-count"></div>
+    </div>
+    <div class="player">
+      <div id="player"></div>
+      {% if videos %}
+        <div class="playlist">
+          <!--<div class="playlist-controls"></div>-->
+          <div class="playlist-items-list">
+            {% for video in videos %}
+              <div class="playlist-card" onclick="playVideo(this)" data-id="{{ video.video_id }}">
+                <img class="playlist-card-img" src="{{ video.thumbnail }}" alt="">
+                <h4 class="playlist-card-title">{{ video.title }}</h4>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  // 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '200',
+      width: '360',
+      videoId: '{{ tracks[0] }}',
+      playerVars: {
+        modestbranding: 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+  const mediaQueryMobile = window.matchMedia("(min-width: 950px)")
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    // event.target.playVideo();
+    if (mediaQueryMobile.matches) {
+      player.setSize(640, 360)
+    }
+    playFirstVideo();
+
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+  const listElement = document.querySelector(".playlist-items-list")
+  const numberOfVideos = document.querySelectorAll(".playlist-card").length
+  const videoCounter = document.querySelector(".video-count")
+
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+      current = document.querySelector(".active")
+      next = current.nextElementSibling
+      if (next)
+      {
+        playVideo(next)
+      }
+      else if (repeatState() == true)
+      {
+        playFirstVideo()
+      }
+      else
+      {
+        player.stopVideo()
+      }
+    }
+  }
+  function stopVideo() {
+    player.stopVideo();
+  }
+
+  function playVideo(card) {
+    var previous = document.querySelector(".active")
+    if (previous)
+    {
+      previous.classList.remove("active")
+    }
+    card.classList.add("active")
+    player.loadVideoById(card.dataset.id)
+
+    // video counter
+    var cardIndex = [].indexOf.call(card.parentElement.children, card) + 1
+    videoCounter.textContent = `${cardIndex} / ${numberOfVideos}`
+
+    // SCROLL
+    var cardPosition = card.offsetTop;
+    listElement.scrollTop = cardPosition
+  }
+
+  function playFirstVideo() {
+    var first = document.querySelector(".playlist-items-list").firstElementChild
+    playVideo(first)
+  }
+
+  function repeatState() {
+    const button = document.querySelector(".repeat")
+    if (button.classList.contains("activeButton"))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  function shuffle() {
+    // Shuffles elements in a list
+    // By - Yair Even Or
+
+    // clone the list
+    temp = listElement.cloneNode(true);
+
+
+    // shuffle the cloned list (better performance)
+    for (var i = temp.children.length + 1; i--; )
+        temp.appendChild( temp.children[Math.random() * i |0] );
+
+    // copy shuffled back to 'ul'
+    listElement.parentNode.replaceChild(temp, listElement);
+
+    const shuffleBtn = document.querySelector(".shuffle")
+    shuffleBtn.classList.add("activeButton")
+
+    playFirstVideo()
+  }
+
+  // ReSize Player Dynamically
+  mediaQueryMobile.addEventListener("change", reSizePlayer)
+
+  function reSizePlayer() {
+    if (mediaQueryMobile.matches) {
+      player.setSize(640, 360)
+    }
+    else {
+      player.setSize(360, 200)
+    }
+  }
+
+
+</script>
+{% endblock %}
