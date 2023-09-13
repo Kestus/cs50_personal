@@ -1,0 +1,27 @@
+sort1 uses: Bubble sort
+
+sorted50000:    real - 0m4.157s
+random50000:    real - 0m17.864s
+reversed50000:  real - 0m13.406s
+
+How do you know?: Wery fast in case of a sorted file, but wery slow in case of reverced
+file. Big difference between best and worst cases is a sign of a Bubble algorithm.
+
+
+sort2 uses: Merge sort
+
+sorted50000:    real - 0m3.537s
+random50000:    real - 0m2.480s
+reversed50000:  real - 0m3.481s
+
+How do you know?: Fastest out of three algorithms. Small difference between best 
+case scenario (sorted)and worst case (reversed).
+
+
+sort3 uses: Selection sort
+
+sorted50000:    real - 0m11.570s
+random50000:    real - 0m8.534s
+reversed50000:  real - 0m8.667s
+
+How do you know?: Average speed, small difference between best and worst case scenario.

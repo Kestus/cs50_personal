@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">TOTAL</th>
+        </thead>
+        <tbody>
+            {% for share in shares %}
+                <tr>
+                    <td>{{ share.symbol }}</td>
+                    <td>{{ share.name }}</td>
+                    <td>{{ share.amount }}</td>
+                    <td>{{ share.price | usd }}</td>
+                    <td>{{ (share.price * share.amount) | usd }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>CASH</b></td>
+                <td>{{ cash | usd }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>TOTAL</b></td>
+                <td>{{ (total + cash) | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

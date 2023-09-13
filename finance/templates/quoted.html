@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ items.symbol }}
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>Value of {{ items.name }} ({{ items.symbol }}) is {{ items.price | usd }}</p>
+    </div>
+{% endblock %}

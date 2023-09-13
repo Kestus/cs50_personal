@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="POST">
+        <div class="form-row row-cols-md-3">
+            <div class="col col-12" style="text-align:right;">
+                <input name="symbol" class="form-control" placeholder="Symbol" type="text">
+            </div>
+            <div class="col col-12">
+                <input name="shares" class="form-control" placeholder="How mutch to Buy" type="number">
+            </div>
+            <div class="col col-12" style="text-align:left;">
+                <button class="btn btn-primary" type="submit">BUY</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

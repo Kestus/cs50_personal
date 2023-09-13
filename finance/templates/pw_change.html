@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Change Password
+{% endblock %}
+
+{% block main %}
+    <form action="/pw_change" method="POST" id="pw_change">
+            <div class="mb-3">
+                <label for="old-password"><b>Old Password</b></label><br />
+                <input class="form-control" name="old-password" type="password">
+            </div>
+            <div class="mb-3">
+                <label for="password"><b>New Password</b></label><br />
+                <input class="form-control" name="password" type="password">
+            </div>
+            <div class="mb-3">
+                <label for="confirmation"><b>Repeat New Password</b></label><br />
+                <input class="form-control" name="confirmation" type="password">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Change</button>
+            </div>
+    </form>
+{% endblock %}

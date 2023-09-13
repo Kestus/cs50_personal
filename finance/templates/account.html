@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>{{ username }}</p>
+        <p>{{ cash | usd }}</p>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/add_cash">Add Cash</a></li>
+            <li class="list-group-item"><a href="/pw_change">Change Password</a></li>
+        </ul>
+    </div>
+{% endblock %}

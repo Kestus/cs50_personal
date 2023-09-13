@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="POST">
+        <div class="form-row row-cols-md-3">
+            <div class="col col-12" style="text-align:right;">
+                <select class="custom-select" name="symbol">
+                    <option selected disabled>Symbol</option>
+                    {% for symbol in symbols %}
+                        <option>{{ symbol.symbol }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-12">
+                <input name="shares" class="form-control" placeholder="How mutch to Sell" type="number" min="1">
+            </div>
+            <div class="col col-12" style="text-align:left;">
+                <button class="btn btn-primary" type="submit">SELL</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

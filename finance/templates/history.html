@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <th scope="col">Symbol</th>
+            <th scope="col">Operation</th>
+            <th scope="col">Shares</th>
+            <th scope="col">price</th>
+            <th scope="col">Transacted</th>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.symbol }}</td>
+                    <td>{{ log.operation }}</td>
+                    <td>{{ log.amount }}</td>
+                    <td>{{ log.price | usd }}</td>
+                    <td>{{ log.timestamp }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
